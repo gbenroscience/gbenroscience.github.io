@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ConstraintLayout
+    width="match_parent"
+    height="match_parent">
+
+
+
+
+    <ImageView
+        id="imgview"
+        width="200"
+        height="200"
+        src="splash.png"
+        start_start="parent"
+        end_end="parent"
+        top_top="parent"
+        bottom_bottom="parent"
+        />
+
+    <Guideline
+        id="guide"
+        width="1"
+        height="1"
+        orientation="horizontal"
+        guide_percent="5"
+        />
+
+
+    <ImageView
+        id="logo"
+        width="200"
+        height="200"
+        start_start="parent"
+        end_end="parent"
+        top_top="guide"
+        src="logo_small.png"
+        />
+
+
+
+    <Guideline
+        id="guideline1"
+        width="1"
+        height="match_parent"
+        orientation="vertical"
+        guide_percent="5" />
+
+    <Guideline
+        id="guideline2"
+        width="1"
+        height="match_parent"
+        orientation="vertical"
+        guide_percent="30" />
+
+    <Guideline
+        id="guideline3"
+        width="1"
+        height="match_parent"
+        orientation="vertical"
+        guide_percent="33" />
+
+    <Guideline
+        id="guideline4"
+        width="1"
+        height="match_parent"
+        orientation="vertical"
+        guide_percent="95" />
+
+
+    <Guideline
+        id="guideline5"
+        width="1"
+        height="1"
+        orientation="horizontal"
+        guide_percent="5" />
+
+
+    <TextArea
+        id="top_header"
+        width="230"
+        height="50"
+        marginStart="24"
+        marginBottom="24"
+        marginTop="48"
+        text="apply_as_agent"
+        textSize="20px"
+        bottom_top="mini_heading"
+        start_start="guideline1" />
+
+
+    <TextArea
+        id="mini_heading"
+        width="230"
+        height="50"
+        marginBottom="24"
+        marginTop="32"
+        fontFamily="Arial"
+        textStyle="italic"
+        text="agent_apply_notif"
+        textColor="dark_gray_color"
+        textSize="20px"
+        bottom_top="top_header"
+        start_start="top_header" />
+
+ 
+    <TextArea
+        id="phone_view"
+        width="230"
+        height="80"
+        inputType="phone"
+        maxLines="1"
+        maxLength="130"
+        paddingStart="form_padding"
+        paddingEnd="form_padding"
+        textSize="20px"
+        bottom_bottom="top_header"
+        start_start="guideline3"
+        end_start="continue_btn"
+        top_bottom="continue_btn" />
+
+
+
+
+    <Button
+        id="continue_btn"
+        width="210"
+        height="45"
+        marginTop="20"
+        marginStart="20"
+        padding="8"
+        text="apply"
+        value="Apply Now"
+        textColor="white"
+        textSize="form_padding"
+        start_start="parent"
+        top_top="parent"
+
+        />
+
+ 
+
+</ConstraintLayout>

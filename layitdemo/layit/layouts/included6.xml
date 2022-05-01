@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<ConstraintLayout
+    width="100%"
+    height="match_parent"
+>
+    
+    <Label
+        id="block_title_6"
+        width="wrap_content"
+        height="wrap_content"
+        cx_align='parent'
+        top_top="parent"
+        marginTop="16"
+        textColor="black"
+        value="Capitals"
+        textSize="1.2em"
+        textStyle="bold italic"
+        fontFamily="Arial"
+    />
+
+
+    <DropDown
+            id="capitals_drop_down"
+            width="220px"
+            height="32px"
+            cx_align="parent"
+            top_bottom="block_title_6"
+            marginEnd="8"
+            items='["Washington DC","Abuja","New Delhi","London","Paris","Dublin","Seoul","Tokyo","Rio De Janeiro","Santiago","Buenos Aires","Quito"]'
+            background="#ddd"
+            fontFamily="Avenir"
+            padding="0px"
+            value="CHECK"
+            textColor="black"
+            textSize="1.5em"
+            textStyle="bold"
+    />
+
+
+
+    
+    
+</ConstraintLayout>

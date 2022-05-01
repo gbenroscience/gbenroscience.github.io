@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ConstraintLayout
+        width="match_parent"
+        height="match_parent"
+>
+
+    <imports
+            files="test/test.js;test/aaa.js;adapters/persons-adapter.js;" controller="TestController"
+    />
+    <View
+            id="section_top"
+            width="match_parent"
+            height="128px"
+            top_top='parent'
+            start_start='parent'
+            end_end='parent'
+            backgroundColor="midnightblue"
+
+
+    />
+    <Paragraph
+            id="site_title"
+            width="180px"
+            height="wrap_content"
+            maxWidth="250px"
+            padding="0"
+            start_start='section_top'
+            cy_align="section_top"
+            marginStart="24"
+            textColor="#eee"
+            value="Layit Framework By Example by {{ name }}"
+            textSize="1.5em"
+            textStyle="bold italic"
+            fontFamily="Kartika"
+
+    />
+
+
+    <Guideline
+            id="guide_menu"
+            width="1"
+            height="1"
+            orientation="vertical"
+            guide_percent="0.5"
+    />
+        <HorizontalListView
+            id='hor_list'
+            width='632px'
+            height='50px'
+            bottom_bottom='section_top'
+            marginBottom='8px'
+            cx_align='parent'
+            items='[{"name": "Home"},{"name": "People and Positions"},{"name": "Lifestyle"},{"name": "About Us"},{"name": "Help"}]'
+            itemViews='["textcell.xml"]'
+            border='1px solid pink'
+            backgroundColor='transparent'
+            cellSpacing="0px"
+            minCellWidth="105px"
+            minCellHeight="40px"
+    />
+    <Button
+            id="login_btn"
+            width="wrap_content"
+            height="wrap_content"
+            end_end="section_top"
+            cy_align="login_input"
+            marginEnd="80"
+            background="btn_dark_green"
+            fontFamily="Avenir"
+            padding="8px"
+            value="LOGIN NOW"
+            textColor="black"
+            textSize="1.2em"
+            textStyle="bold"
+            borderRadius="8px"
+
+    />
+
+
+    <TextField
+            id="login_input"
+            width="220px"
+            height="36px"
+            end_start="login_btn"
+            cy_align="section_top"
+            marginTop="16"
+            marginEnd="18"
+            placeholder="Login"
+            background="btn_dark_green"
+            fontFamily="Avenir"
+            padding="8px"
+            text="apply"
+            value="LOGIN"
+            textColor="black"
+            textSize="1.2em"
+            textStyle="bold"
+            borderRadius="10px"
+            inputType='password'
+    />
+
+    <Label
+            id="text_area_label"
+            width="wrap_content"
+            height="wrap_content"
+            start_start='notes_area'
+            bottom_top="notes_area"
+            marginStart="0"
+            marginBottom="16"
+            textColor="red"
+            paddingStart="0"
+            value="Here is a textarea below!"
+            textSize="1.2em"
+            textStyle="bold"
+            fontFamily="Arial"
+    />
+    <TextArea
+            id="notes_area"
+            width="512px"
+            height="0"
+            dim_ratio='2:1'
+            cx_align="parent"
+            top_bottom="section_top"
+            marginTop="80"
+            marginEnd="8"
+            placeholder="Login"
+            background="white"
+            fontFamily="Avenir"
+            padding="8px"
+            text=""
+            value="lol!!!!"
+            textColor="black"
+            textSize="1.2em"
+            textStyle="bold"
+            border="2px solid blue"
+            borderRadius="12px"
+            resize="none"
+    />
+
+    <Button
+            id="check_btn"
+            width="wrap_content"
+            height="wrap_content"
+            start_end="notes_area"
+            cy_align="notes_area"
+            marginStart="8"
+            background="lightgray"
+            fontFamily="Avenir"
+            padding="0px"
+            value="CHECK"
+            textColor="black"
+            textSize="1.5em"
+            textStyle="bold"
+    />
+
+    <DropDown
+            id="drop_down"
+            width="220px"
+            height="32px"
+            end_start="notes_area"
+            cy_align="notes_area"
+            marginEnd="8"
+            items='["Nigeria","The United States","The United Kingdom","France","South Africa","Republic of Ireland","South Korea","Japan","Brazil","Chile","Argentina","Ecuador"]'
+            background="#ddd"
+            fontFamily="Avenir"
+            padding="0px"
+            value="CHECK"
+            textColor="black"
+            textSize="1.5em"
+            textStyle="bold"
+    />
+
+    <Clock
+            id="clock_1"
+            width="90"
+            height="90"
+            start_end="site_title"
+            top_top="site_title"
+            bottom_bottom="site_title"
+            marginTop="0"
+            clockOuterColor="transparent"
+            clockMiddleColor="black"
+            clockInnerColor="white"
+            clockTickColor="black"
+            clockSecondsColor="brown"
+            clockMinutesColor="black"
+            clockHoursColor="black"
+            clockCenterSpotWidth="22"
+            clockOuterCircleAsFractionOfFrameSize="1"
+            clockShowBaseText="true"
+
+    />
+
+    <ProgressBar
+            id="progress"
+            width="300"
+            height="40"
+            cy_align="check_btn"
+            start_end="check_btn"
+            marginStart="32px"
+            marginTop="32px"
+            progressColor="darkgreen"
+            backgroundColor="gray"
+            textColor="white"
+            value="32"
+
+    />
+
+    <Label
+            id="includes_label"
+            width="wrap_content"
+            height="wrap_content"
+            cx_align='included_details'
+            bottom_top="included_details"
+            border="1px solid brown"
+            marginStart="0"
+            marginBottom="16"
+            textColor="darkred"
+            paddingStart="0"
+            value="An included layout with other levels of includes below!"
+            textSize="1.99em"
+            textStyle="bold"
+            fontFamily="Arial"
+    />
+
+    <include
+            layout="includer"
+            id="included_details"
+            width="100%"
+            height="220"
+            marginTop="146px"
+            cx_align="parent"
+            top_bottom="table_two"
+            border="1px solid lightgray"
+            borderRadius="1em"
+            useMiBackground="true"
+            miFgColor="white"
+            miBgColor="midnightblue"
+            miOpacity="0.6"
+            miBgOpacityEnabled="false"
+            miStrokeWidth="1"
+            miMinSize="8"
+            miNumShapes="20"
+            miTextOnly="false"
+            miTextArray='["NGN","GBP","USD","EUR"]'
+            miCacheAfterDraw="false"
+    />
+
+
+    <Radio
+            id='yes'
+            width="20"
+            height="20"
+            name='question'
+            checked='false'
+            cx_align="notes_area"
+            top_bottom="included_details"
+            marginTop='16'
+
+    />
+    <Radio
+            id='no'
+            width="20"
+            height="20"
+            name='question'
+            checked='true'
+            top_top="yes"
+            start_end="yes"
+            marginStart='16'
+            cssClass="funny_radio"
+
+
+    />
+
+    <Label
+            id="table_one_label"
+            width="wrap_content"
+            height="wrap_content"
+            start_start='table_one'
+            bottom_top="table_one"
+            marginStart="0"
+            marginBottom="16"
+            textColor="red"
+            paddingStart="0"
+            value="Here is a native html table below"
+            textSize="1.2em"
+            textStyle="bold"
+            fontFamily="Arial"
+    />
+
+    <NativeList
+            id='ul_list'
+            width='table_one'
+            height='wrap_content'
+            end_start='table_one'
+            top_top='table_one'
+            bottom_bottom='table_one'
+            marginEnd='16'
+            listType='ol'
+            showBullets='true'
+            items='["Antelope","Buffalo","Chimpanzee","Dog","Elephant","Frog","Gorilla","Hen","Impala","Jaguar"]'
+            border='1px solid midnightblue'
+            backgroundColor='pink'
+
+    />
+
+
+    <NativeTable
+            id="table_one"
+            width="120"
+            height="90"
+            end_start="drop_down"
+            cy_align="notes_area"
+            marginHorizontal='20px'
+            hasHeader="true"
+            fontWeight='bold'
+            hasFooter="false"
+            textColor="midnightblue"
+            tableItems="[[23,44,90],[1001,873,202],[34,98,188]]"
+
+
+    />
+
+    <Label
+            id="custom_table_label"
+            width="wrap_content"
+            height="wrap_content"
+            start_start='table_two'
+            top_bottom="notes_area"
+            marginStart="0"
+            marginTop="180"
+            textColor="darkred"
+            paddingStart="0"
+            value="A custom table below!"
+            textSize="1.2em"
+            textStyle="bold"
+            fontFamily="Arial"
+    />
+
+
+    <SearchableTableView
+            id="table_two"
+            width="90%"
+            height="350"
+            withNumbering='true'
+            cx_align="parent"
+            top_bottom="custom_table_label"
+            marginTop="8"
+            hasHeader="true"
+            hasFooter="false"
+            showBorders="true"
+            buttonText="ADD MORE"
+            showLeftBtn="true"
+            scrollHeight="100px"
+            headerPadding="1.3em"
+            fontSize="1.0em"
+            theme="#444444"
+            title="Layit!!"
+            src="splash.png"
+            pagingEnabled="true"
+            actionColumns='["VIEW","DELETE"]'
+            checkableColumns='["RED" , "BLUE"]'
+            textColumns='["Value 1","Value 2","Value 3"]'
+            selectColumns='[{"Countries": ["Nigeria","Portugal","Chile","Colombia","South Africa"]},{"Capitals": ["Abuja","Lisbon","Santiago","Bogota","Pretoria"]},{"Continents": ["Africa","Europe","South America","South America","Africa"]}]'
+            tableHeaders='["Column 1","Column 2","Column 3"]'
+            tableItems='[[10908008080808088,"29999999999999aaaaaaaaaaasssss99999999999999",39878866686],[1001,873,202],[34,98,188],[394,598,1086],["COOL","NUMBERS","HERE"],[43,77,98],[120,220,320],[900,1000,1100]]'
+            backgroundColor="whitesmoke"
+
+
+    />
+
+    <VideoView
+            id="video_1"
+            width="250px"
+            height="160px"
+            cx_align="progress"
+            marginTop='12px'
+            bottom_top="progress"
+            sources='[{"src": "/videos/stuff.mp4","type": "video/mp4", "codecs": "avc1.42E01E, mp4a.40.2, theora, vorbis"}]'
+            autoplay='true'
+            muted='true'
+            controls='true'
+            preload='true'
+
+    />
+
+    <ImageButton
+            id="img_btn"
+            width="300px"
+            height="width"
+            src="scenery/fine-1.jpg"
+            padding="4px"
+            marginTop="16px"
+            top_bottom="progress"
+            cx_align="progress"
+    />
+    <ImageView
+            id="img_view"
+            width="height"
+            height="100px"
+            src="phone.png"
+            start_end="notes_area"
+            top_top="notes_area"
+    />
+    <ListView
+            id='custom_list'
+            width='400px'
+            height='600px'
+            marginTop="32px"
+            top_bottom='yes'
+            cx_align='parent'
+            marginEnd='16'
+            items='[{"name": "Mayowa Oloruntobi","phone": "08165779034","src":"one.png"},{"name": "George Phinehas","phone": "07039347746","src":"faces/two.png"},{"name": "Floyd Lloyd","phone": "08038009643","src":"faces/three.png"},{"name": "Marcus Davis","phone": "08032162798","src":"faces/four.jpg"}]'
+            itemViews='["listcell1.xml"]'
+            border='1px solid midnightblue'
+            backgroundColor='transparent'
+            cellSpacing="4px"
+    />
+    
+    <Label
+            id="form_one_label"
+            width="wrap_content"
+            height="wrap_content"
+            end_start='form'
+            cy_align="form"
+            textAlign="center"
+            backgroundColor="pink"
+            marginEnd="16"
+            textColor="red"
+            paddingStart="0"
+            value="Here is a form view!"
+            textSize="1.2em"
+            textStyle="bold"
+            fontFamily="Arial"
+    />
+    <Form
+            id="form"
+            width="600px"
+            height="200px"
+            layout="form_view"
+            name="form_sample"
+            marginTop="32px"
+            action="https://www.google.co.uk"
+            autocomplete="on"
+            method="post"
+            enctype="application/x-www-form-urlencoded"
+            target="_blank"
+            cx_align="custom_list"
+            top_bottom="custom_list"
+            border="1px solid purple"
+    />
+        <Label
+            id="tabview_one_label"
+            width="wrap_content"
+            height="wrap_content"
+            end_start='tabview'
+            cy_align="tabview"
+            textAlign="center"
+            backgroundColor="pink"
+            marginEnd="16"
+            textColor="red"
+            paddingStart="0"
+            value="Here is a TabView"
+            textSize="1.2em"
+            textStyle="bold"
+            fontFamily="Arial"
+    />
+       <TabView
+            id="tabview"
+            width="400px"
+            height="48px"
+            name="tab_view"
+            marginTop="32px"
+            cx_align="form"
+            top_bottom="form"
+            selectedFg='white'
+            deselectedFg='darkred'
+            iconSize="64px"
+            fontStyle="bold"
+            borderRadius='32px'
+            border='2px solid gray'
+            tabItems='[{"value":"scenery/fine-7.jpg","type":"image"},{"value":"Views","type":"text"},{"value":"Profile","type":"text"},{"value":"scenery/fine-6.jpg","type":"image"}]'
+    />
+       
+          <Label
+            id="custom_grid_label"
+            width="wrap_content"
+            height="wrap_content"
+            end_start='custom_grid'
+            cy_align="custom_grid"
+            textAlign="center"
+            backgroundColor="pink"
+            marginEnd="16"
+            textColor="red"
+            paddingStart="0"
+            value="Here is a GridView!"
+            textSize="1.2em"
+            textStyle="bold"
+            fontFamily="Arial"
+    />
+        <GridView
+            id='custom_grid'
+            width='450px'
+            height='560px'
+            marginTop="32px"
+            top_bottom='tabview'
+            cx_align='parent'
+            marginEnd='16'
+            cols="3"
+            minGridHeight="232px"
+            items='[{"name": "Mayowa Oloruntobi","phone": "08165779034","src":"one.png"},{"name": "George Phinehas","phone": "07039347746","src":"faces/two.png"},{"name": "Floyd Lloyd","phone": "08038009643","src":"faces/three.png"},{"name": "Marcus Davis","phone": "08032162798","src":"faces/four.jpg"}]'
+            itemViews='["gridcell.xml"]'
+            border='1px solid midnightblue'
+            backgroundColor='transparent'
+            cellSpacing="12px"
+            cellBackground='lightblue'
+            cellBorder="1px solid darkred"
+    />
+                    
+        <IconLabelView
+            id='icon_view'
+            width='220'
+            height='64'
+            marginTop="32px"
+            end_start="custom_grid_label"
+            cy_align='custom_grid_label'
+            marginEnd='16'
+            text="Another way to label things!"
+            gravity="center"
+            fontStyle='bold'
+            textColor="white"
+            textColorHover="#ccc"
+            backgroundColor="gray"
+            backgroundColorHover="#999"
+            
+    />
+        <MultiLineLabel
+            id='multi_line'
+            width='500px'
+            height='200px'
+            marginTop="32px"
+            start_end="custom_grid"
+            cy_align='custom_grid'
+            marginStart='16'
+            padding="2px"
+            fontSize="28px"
+            text="1. Documenting a large idea requires multiple lines of text. Shun single line text for such! 2. Documenting a large idea requires multiple lines of text. Shun single line text for such! 3. Documenting a large idea requires multiple lines of text. Shun single line text for such! 4. Documenting a large idea requires multiple lines of text. Shun single line text for such! 5. Documenting a large idea requires multiple lines of text. Shun single line text for such! 6.Documenting a large idea requires multiple lines of text. Shun single line text for such! 7. Documenting a large idea requires multiple lines of text. Shun single line text for such! 8. Documenting a large idea requires multiple lines of text. Shun single line text for such!  9. Documenting a large idea requires multiple lines of text. Shun single line text for such! 10. Documenting a large idea requires multiple lines of text. Shun single line text for such! 11. Documenting a large idea requires multiple lines of text. Shun single line text for such! 12. Documenting a large idea requires multiple lines of text. Shun single line text for such! 13. Documenting a large idea requires multiple lines of text. Shun single line text for such! 14. Documenting a large idea requires multiple lines of text. Shun single line text for such! 15. Documenting a large idea requires multiple lines of text. Shun single line text for such! 16. Documenting a large idea requires multiple lines of text. Shun single line text for such! 17. Documenting a large idea requires multiple lines of text. Shun single line text for such! 18. Documenting a large idea requires multiple lines of text. Shun single line text for such! 19. Documenting a large idea requires multiple lines of text. Shun single line text for such! 20. Documenting a large idea requires multiple lines of text. Shun single line text for such! 21. Documenting a large idea requires multiple lines of text. Shun single line text for such! 22. Documenting a large idea requires multiple lines of text. Shun single line text for such! "
+            fontStyle='bold'
+            textColor="#ccc"
+            backgroundColor="midnightblue"
+            lineSpacing="14"
+            border="2px solid black"
+            gravity="start"
+            scrollBarWidth="12px"
+            scrollBarTheme="gray"
+            
+    />
+
+</ConstraintLayout>

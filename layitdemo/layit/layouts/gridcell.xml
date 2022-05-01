@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<ConstraintLayout
+        width="120px"
+        height="100%"
+        backgroundColor="#999"
+        border="1px dashed white"
+        cx_align='parent'
+        cy_align='parent'
+>
+
+    <ImageView
+            id="p_img"
+            width="90%"
+            height="80px"
+            src="phone.png"
+            cx_align='parent'
+            top_top='parent'
+            marginTop="4px"
+            border='2px solid red'
+            backgroundColor="yellow"
+    />
+    <Label
+            id="p_name"
+            width="wrap_content"
+            height="wrap_content"
+            top_bottom='p_img'
+            cx_align="parent"
+            marginTop="4px"
+            textColor="white"
+            horAlign="center"
+            value="la-la-la-name"
+            textSize="0.75em"
+            textStyle="bold italic"
+            fontFamily="Arial"
+        border="1px solid brown"
+            cssClass="list_cell_class"
+    />
+    <Label
+            id="p_phone"
+            width="wrap_content"
+            height="wrap_content"
+            top_bottom='p_name'
+            cx_align="parent"
+            marginTop="14px"
+            textColor="white"
+            value="la-la-la-phone"
+            textSize="0.75em"
+            textStyle="bold italic"
+            fontFamily="Arial"
+        border="1px dashed brown"
+            cssClass="list_cell_class"
+    />
+
+</ConstraintLayout>

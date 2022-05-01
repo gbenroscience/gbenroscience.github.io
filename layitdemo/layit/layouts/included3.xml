@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<ConstraintLayout
+    width="100%"
+    height="match_parent"
+>
+    
+    <Label
+        id="block_title_3"
+        width="wrap_content"
+        height="wrap_content"
+        cx_align='parent'
+        top_top="parent"
+        marginTop="16"
+        textColor="black"
+        value="Yet more details"
+        textSize="1.2em"
+        textStyle="bold"
+        fontFamily="Papyrus"
+    />
+    
+        
+    
+    <TextField
+        id="phone_input_3"
+        width="150px"
+        height="32px"
+        start_start="parent"
+        end_end="parent"
+        top_bottom="block_title_3"
+        margin="8"
+        placeholder="Office Line"
+        background="white"
+        fontFamily="Arial"
+        padding="8px"
+        inputType="phone"
+        text=""
+        value=""
+        textColor="black"
+        textSize="1.2em"
+        textStyle="bold"
+        borderRadius="10px"
+    />
+
+    
+    
+</ConstraintLayout>

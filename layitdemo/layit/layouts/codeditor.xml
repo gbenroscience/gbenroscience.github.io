@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<ConstraintLayout
+    width="30%"
+    height="45%"
+    border="1px dashed brown"
+>
+    
+    <Label
+        id="block_title"
+        width="wrap_content"
+        height="wrap_content"
+        cx_align='parent'
+        top_top="parent"
+        marginTop="16"
+        textColor="black"
+        value="Enter details"
+        textSize="1.2em"
+        textStyle="bold"
+        fontFamily="Arial"
+    />
+    
+        
+    
+    <TextField
+        id="phone_input"
+        width="150px"
+        height="32px"
+        start_start="parent"
+        end_end="parent"
+        top_bottom="block_title"
+        margin="8"
+        placeholder="Phone"
+        background="white"
+        fontFamily="Avenir"
+        padding="8px"
+        inputType="phone"
+        text=""
+        value=""
+        textColor="black"
+        textSize="1.2em"
+        textStyle="bold"
+        borderRadius="10px"
+    />
+    
+    <TextField
+        id="passcode_input"
+        width="150px"
+        height="32px"
+        start_start="phone_input"
+        end_end="phone_input"
+        top_bottom="phone_input"
+        marginTop='8px'
+        placeholder="Password"
+        inputType="password"
+        background="white"
+        fontFamily="Avenir"
+        padding="8px"
+        text=""
+        value=""
+        textColor="black"
+        textSize="1.2em"
+        textStyle="bold"
+        borderRadius="10px"
+    />
+        
+    <Button
+        id="submit"
+        width="64px"
+        height="24px"
+        start_start="phone_input"
+        end_end="phone_input"
+        top_bottom="passcode_input"
+        marginTop='14px'
+        background="btn_dark_green"
+        fontFamily="Avenir"
+        padding="0px"
+        text="Submit"
+        textColor="black"
+        textSize="1.2em"
+        textStyle="bold"
+        borderRadius="10px"
+    />
+    
+    
+    
+    
+    
+</ConstraintLayout>

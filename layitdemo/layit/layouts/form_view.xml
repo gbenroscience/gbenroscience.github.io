@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<ConstraintLayout
+        width="50%"
+        height="200px"
+        border="1px dashed midnightblue"
+        cx_align="parent"
+>
+
+    <Label
+            id="form_label"
+            width="wrap_content"
+            height="wrap_content"
+            cx_align='parent'
+            top_top="parent"
+            marginTop="16"
+            textColor="black"
+            value="Enter details"
+            textSize="1.2em"
+            textStyle="bold"
+            fontFamily="Arial"
+    />
+
+
+    <TextField
+            id="form_phone"
+            width="90%"
+            height="32px"
+            cx_align="parent"
+            top_bottom="form_label"
+            margin="8"
+            name="form_phone"
+            placeholder="Phone"
+            background="white"
+            fontFamily="Avenir"
+            padding="8px"
+            inputType="phone"
+            text=""
+            value=""
+            textColor="black"
+            textSize="1.2em"
+            textStyle="bold"
+            borderRadius="10px"
+    />
+
+    <TextField
+            id="form_passcode"
+            width="form_phone"
+            height="32px"
+            start_start="form_phone"
+            end_end="form_phone"
+            top_bottom="form_phone"
+            marginTop='8px'
+            name="form_passcode"
+            placeholder="Password"
+            inputType="password"
+            background="white"
+            fontFamily="Avenir"
+            padding="8px"
+            text=""
+            value=""
+            textColor="black"
+            textSize="1.2em"
+            textStyle="bold"
+            borderRadius="10px"
+    />
+
+    <Button
+            id="form_submit"
+            width="form_phone/2"
+            height="24px"
+            start_start="form_phone"
+            end_end="form_phone"
+            top_bottom="form_passcode"
+            marginTop='14px'
+            background="btn_dark_green"
+            fontFamily="Avenir"
+            padding="0px"
+            text="Submit"
+            textColor="black"
+            textSize="1.2em"
+            textStyle="bold"
+            borderRadius="10px"
+            inputType="submit"
+    />
+
+
+
+
+
+</ConstraintLayout>

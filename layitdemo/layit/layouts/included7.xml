@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<ConstraintLayout
+    width="100%"
+    height="match_parent"
+>
+    
+    <Label
+        id="block_title_7"
+        width="wrap_content"
+        height="wrap_content"
+        cx_align='parent'
+        top_top="parent"
+        marginTop="16"
+        textColor="purple"
+        value="The United States"
+        textSize="1.2em"
+        textStyle="bold italic"
+        fontFamily="Arial"
+    />
+
+
+    <DropDown
+            id="us_states_drop_down"
+            width="220px"
+            height="32px"
+            cx_align="parent"
+            top_bottom="block_title_7"
+            marginEnd="8"
+            items='["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho",
+                    "Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Mississippi","Minnesota","Missouri",
+                    "Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon",
+                    "Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington",
+                    "West Virginia","Wisconsin","Wyoming"
+                   ]'
+            background="#ddd"
+            fontFamily="Avenir"
+            padding="0px"
+            value="CHECK"
+            textColor="black"
+            textSize="1.5em"
+            textStyle="bold"
+    />
+
+
+
+    
+    
+</ConstraintLayout>
