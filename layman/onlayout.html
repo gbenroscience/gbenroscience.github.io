@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Running Tests Page</title>
+
+    <style>
+        #sidebar {
+            background-color: #2A765F;
+        }
+
+        #app-title {
+            display: inline-flex;
+            align-items: center;
+            padding-left: 24px;
+            color: white;
+            background-color: #2A6650;
+            font-size: 1.3em;
+            font-weight: bold;
+            font-family: "Segoe MDL2 Assets", serif;
+        }
+
+        #top-bar {
+            border-left: 1px solid #2A765F;
+            background-color: #2A6650;
+        }
+
+        #content-area {
+            background-color: #dddddd;
+        }
+
+        #side-menu {
+            list-style-type: none;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        #side-menu > li {
+            list-style-type: none;
+            padding: 12px 8px 12px 24px;
+            color: white;
+            font-size: 1.05em;
+            font-weight: normal;
+            /* border-bottom: 1px solid #2A6650;*/
+        }
+
+        #side-menu > li:focus {
+            background-color: #2A805F;
+            border-radius: 4px;
+            text-decoration: underline solid wheat 1px;
+        }
+
+        #side-menu > li:first-child {
+            /*border-top: 1px solid #2A6650;*/
+        }
+
+        #side-menu > li:hover {
+            cursor: pointer;
+            list-style-type: none;
+            background-color: #2A805F;
+            border-radius: 4px;
+            font-weight: bold;
+            color: wheat;
+        }
+
+        #top-bar-title {
+            font-weight: bold;
+            color: white;
+        }
+        select{
+            border-radius: 4px;
+        }
+        select, select > option {
+            font-size: 16px;
+            font-weight: bold;
+            padding-top: 16px;
+            padding-bottom: 16px;
+        }
+
+        #logout-btn {
+            color: white;
+            background-color: #2A765F;
+            font-weight: bold;
+            font-size: 1.18em;
+            border: 1px solid #2A6650;
+        }
+
+        #logout-btn:hover {
+            color: wheat;
+            background-color: #2A805F;
+            cursor: pointer;
+        }
+        #logout-btn:active {
+            color: wheat;
+            background-color: #2A685F;
+            cursor: pointer;
+        }
+        #content-block{
+            font-size: 4em;
+            font-weight: bold;
+        }
+
+    </style>
+    <script type="text/javascript" src="layman.js"></script>
+    <script>
+        onLayoutComplete = function () {
+           let menu = document.getElementById('side-menu');
+           let items = menu.getElementsByTagName('li');
+           let contentZone  = document.getElementById('content-block');
+           for(let i=0;i<items.length;i++){
+               items[i].onclick = function (e) {
+                   contentZone.innerText = e.target.textContent;
+               }
+           }
+        }
+    </script>
+</head>
+<body data-guide-color="red">
+
+<div id="sidebar" data-const="w:15%,h:100%,ss:parent,tt:parent">
+    <span id="app-title" data-const="w:match_parent,h:48, ss: parent, tt: parent">Web Constraints</span>
+    <ul id="side-menu" data-const="w: parent,h:50%,ss:parent,tb: app-title, mt: 32">
+        <li tabindex="1">Nigeria </li>
+        <li tabindex="2">United States</li>
+        <li tabindex="3">China</li>
+        <li tabindex="4">United Kingdom</li>
+        <li tabindex="5">Germany</li>
+        <li tabindex="6">India</li>
+        <li tabindex="7">Canada</li>
+        <li tabindex="8">South Korea</li>
+    </ul>
+    <input id="logout-btn" type="button" value="LOGOUT" title="Logout Button"
+           data-const="w: parent, h: 42px, ss: parent, bb: parent">
+</div>
+<div id="top-bar" data-const="w:0,h:48px,tt:parent,se:sidebar,ee:parent">
+<span id="top-bar-title" data-const="w:wrap_content, h:wrap_content, ss:parent, cy:parent, ms:12px">
+ Application Description
+</span>
+</div>
+<div id="content-area" data-const="w:0,h:0,se:sidebar,ee:parent,tb:top-bar,bb:parent">
+    <select id="countries-select" data-const="w: wrap_content, h: 42px, tt: parent, ee: parent, mt: 4, me: 4">
+        <option>Nigeria</option>
+        <option>United States of America</option>
+        <option>Israel</option>
+        <option>United Kingdom</option>
+        <option>Norway</option>
+        <option>Australia</option>
+    </select>
+    <span id="content-block" data-const="w:wrap_content, h:wrap_content, cx: parent, cy: parent">
+        CONTENT
+    </span>
+</div>
+
+</body>
+</html>
