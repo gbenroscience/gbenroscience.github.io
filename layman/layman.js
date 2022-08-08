@@ -1047,7 +1047,7 @@ View.prototype.layoutChildren = function (page) {
                     if (ee) {
                         this.setRightAlignEE(hiddenViewForWidthId, child.margins.end, ee, AutoLayout.Priority.REQUIRED, constraints);
                     } else if (es) {
-                        this.setRightAlignES(hiddenViewForWidthId, child.margins.end, se, AutoLayout.Priority.REQUIRED, constraints);
+                        this.setRightAlignES(hiddenViewForWidthId, child.margins.end, es, AutoLayout.Priority.REQUIRED, constraints);
                     }
 
                     constraints.push({
