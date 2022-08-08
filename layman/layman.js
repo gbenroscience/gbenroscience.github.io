@@ -21,15 +21,20 @@ function docReady(fn) {
     if (document.readyState === "complete" || document.readyState === "interactive") {
         fn();
         // call on next available tick
-       // setTimeout(fn, 1);
+        // setTimeout(fn, 1);
     } else {
         document.addEventListener("DOMContentLoaded", fn);
     }
 }
+
+let onLayoutComplete = function () {
+
+};
 docReady(function () {
-   document.body.style.visibility = 'hidden';
+    document.body.style.visibility = 'hidden';
     let page = new Page(null);
     page.layout();
+    onLayoutComplete();
 });
 
 /**
@@ -42,7 +47,7 @@ function Page(rootNode) {
     this.viewMap = new Map();
 
 
-    if(!rootNode){
+    if (!rootNode) {
         let htmlBodyStyle = new Style('html,body', []);
         htmlBodyStyle.addFromOptions({
             width: '100%',
@@ -63,16 +68,17 @@ function Page(rootNode) {
         let styleObj = new Style('.abs', []);
         styleObj.addStyleElement('position', 'absolute');
         styleObj.addStyleElement('padding', '0');
-        styleObj.addStyleElement('margin', '0');;
+        styleObj.addStyleElement('margin', '0');
+        ;
         updateOrCreateSelectorInStyleSheet(styleSheet, htmlBodyStyle);
         updateOrCreateSelectorInStyleSheet(styleSheet, generalStyle);
         updateOrCreateSelectorInStyleSheet(styleSheet, styleObj)
 
-       let color = document.body.getAttribute(attrKeys.layout_constraintGuideColor);
-        let style = new Style('.'+GUIDE_CLASS, []);
+        let color = document.body.getAttribute(attrKeys.layout_constraintGuideColor);
+        let style = new Style('.' + GUIDE_CLASS, []);
         style.addFromOptions({
-            'background-color' : (!color ? 'transparent' : color),
-            'visibility' : (!color ? 'hidden' : 'visible')
+            'background-color': (!color ? 'transparent' : color),
+            'visibility': (!color ? 'hidden' : 'visible')
         });
 
         updateOrCreateSelectorInStyleSheet(styleSheet, style);
@@ -82,6 +88,64 @@ function Page(rootNode) {
 Page.prototype.findViewById = function (viewId) {
     return this.viewMap.get(viewId);
 };
+
+/**
+ * checks if the node is one of the nodes that should be ignored
+ * @param node
+ * @return {boolean}
+ */
+function shouldIgnoreNode(node) {
+    let name = node.nodeName.toLowerCase();
+    return (name === 'li' || name === 'tr' || name === 'td' || name === 'th' || name === 'tbody' || name === 'thead'
+        || name === 'tfoot' || name === 'col' || name === 'colgroup' || name === '#text' || name === '#comment'
+        || name === 'script' || name === 'option' || name === 'optgroup');
+}
+
+/**
+ * Checks if the node is a comment, a whitespace or a script node
+ * @param node
+ * @return {boolean}
+ */
+function isWhiteSpaceOrCommentNode(node) {
+    let name = node.nodeName.toLowerCase();
+    return (name === '#text' || name === '#comment');
+}
+/**
+ * Checks if the node is a comment, a whitespace or a script node
+ * @param node
+ * @return {boolean}
+ */
+function isWhiteSpaceCommentOrScriptNode(node) {
+    let name = node.nodeName.toLowerCase();
+    return (name === '#text' || name === '#comment' || name === 'script');
+}
+
+/**
+ * Checks if the node is one of the ui nodes that are children of other nodes and that need to be ignored when doing layout.
+ * E.g. li, td, th, tbody, thead, tfoot, col and colgroup are all laid out by their parents.
+ * @param node
+ * @return {boolean}
+ */
+function shouldIgnoreSpecialChildElement(node) {
+    let name = node.nodeName.toLowerCase();
+    return (name === 'li' || name === 'tr' || name === 'td' || name === 'th' || name === 'tbody' || name === 'thead'
+        || name === 'tfoot' || name === 'col' || name === 'colgroup' || name === 'option' || name === 'optgroup');
+}
+
+/**
+ * This layout system needs every view to have an id.
+ * We cant force developers to assign ids to things like li or td, th etc.
+ * Though we can enforce them to apply ids to their parents.
+ * So we auto-assign ids to the child elements if there are no ids on them
+ */
+function enforceIdOnChildElements(node){
+    if(shouldIgnoreSpecialChildElement(node)){
+        let id = node.getAttribute(attrKeys.id);
+        if(!id){
+            node.setAttribute(attrKeys.id, ULID.ulid());
+        }
+    }
+}
 
 /**
  *
@@ -94,15 +158,18 @@ Page.prototype.layout = function (node) {
         root.id = BODY_ID;
     }
     if (node) {
-        if (node.nodeName.toLowerCase() === 'script') {
+        let name = node.nodeName.toLowerCase();
+        if (name === 'script') {
             return;
         }
         if (!node.id) {
-            throw 'Please supply the id for node: ' + node.nodeName + ', around:\n' + node.outerHTML + ". The layout engine needs it."
+            if(!shouldIgnoreSpecialChildElement(node)){
+                throw 'Please supply the id for node: ' + name + ', around:\n' + node.outerHTML + ". The layout engine needs it.";
+            }
         }
     }
 
-    if (root.nodeName !== '#text' && root.nodeName !== '#comment') {
+    if (!isWhiteSpaceOrCommentNode(root)) {
         let constraints = root.getAttribute(attrKeys.layout_constraint);
         root.removeAttribute(attrKeys.layout_constraint);
         if (!constraints) {
@@ -131,18 +198,19 @@ Page.prototype.layout = function (node) {
 
         let attr = root.getAttribute(attrKeys.layout_constraintGuide);
         if (!attr) {
-            if (root === document.body) {
-                view = new View(this, root, refIds, undefined);
-            } else {
-                view = new View(this, root, refIds, root.parentNode.id);
-            }
+            enforceIdOnChildElements(root);
+                if (root === document.body) {
+                    view = new View(this, root, refIds, undefined);
+                } else {
+                    view = new View(this, root, refIds, root.parentNode.id);
+                }
         } else {
-            if(attr === 'true'){
+            if (attr === 'true') {
                 //The next 2 lines forces the Guidelines size to be determined by our code. Take control from the user.
                 refIds.set(attrKeys.layout_width, sizes.WRAP_CONTENT);
                 refIds.set(attrKeys.layout_height, sizes.WRAP_CONTENT);
                 view = new Guideline(this, root, refIds, root.parentNode.id);
-            }else{
+            } else {
                 throw 'Invalid value for data-guide'
             }
 
@@ -152,9 +220,11 @@ Page.prototype.layout = function (node) {
             let childNodes = root.children;
             for (let j = 0; j < childNodes.length; j++) {
                 let childNode = childNodes[j];
-                if (childNode.nodeName !== '#text' && childNode.nodeName !== '#comment' && childNode.nodeName.toLowerCase() !== 'script') {
-                    let childId = childNode.getAttribute(attrKeys.id);
-                    view.childrenIds.push(childId);//register the child with the parent
+                if (!isWhiteSpaceCommentOrScriptNode(childNode)) {
+                    if (!shouldIgnoreSpecialChildElement(childNode)) {
+                        let childId = childNode.getAttribute(attrKeys.id);
+                        view.childrenIds.push(childId);//register the child with the parent
+                    }
                     this.layout(childNode);
                 }
             }//end for loop
@@ -857,8 +927,6 @@ View.prototype.layoutSelf = function () {
     }
 
     return constraints;
-
-
 };
 
 
@@ -2194,6 +2262,7 @@ View.prototype.setSizeBoundariesConstraints = function (constraints, cid, maxWid
 
             if (parsedMaxWidth.number) {
                 if (parsedMaxWidth.units === 'px') {
+
                     constraints.push({
                         view1: cid,
                         attr1: 'width',    // see AutoLayout.Attribute
@@ -2545,7 +2614,6 @@ View.prototype.setSizeBoundariesConstraints = function (constraints, cid, maxWid
 
 
     }
-
 };
 
 /**
@@ -3132,7 +3200,7 @@ View.prototype.calculateWrapContentSizes = function (node) {
         let rect = node.getBoundingClientRect();
         this.wrapWidth = (0.813 * rect.width) + 'px';
         this.wrapHeight = (0.825 * rect.height) + 'px';
-        alert(this.wrapWidth + " , "+this.wrapHeight);
+        alert(this.wrapWidth + " , " + this.wrapHeight);
     } else if (w !== sizes.WRAP_CONTENT && h === sizes.WRAP_CONTENT) {
         node.style.width = w;
         let rect = node.getBoundingClientRect();
@@ -3165,10 +3233,10 @@ function Guideline(page, node, refIds, parentId) {
     let w = refIds.get(attrKeys.layout_width);
     let h = refIds.get(attrKeys.layout_height);
 
-    if(w !== sizes.WRAP_CONTENT){
+    if (w !== sizes.WRAP_CONTENT) {
         this.refIds.set(attrKeys.layout_width, sizes.WRAP_CONTENT);
     }
-    if(h !== sizes.WRAP_CONTENT){
+    if (h !== sizes.WRAP_CONTENT) {
         this.refIds.set(attrKeys.layout_height, sizes.WRAP_CONTENT);
     }
     addClass(node, GUIDE_CLASS);
@@ -3219,7 +3287,7 @@ Guideline.prototype.layoutGuide = function (constraints) {
             if (isNaN(val = parseFloat(guidePct))) {
                 throw 'Please specify a floating point number between 0 and 1 to signify 0 - 100% of width';
             }
-            val = val > 1 ? val/100.0 : val;
+            val = val > 1 ? val / 100.0 : val;
         } else if (isNaN(val = parseFloat(guidePct))) {
             throw 'Please specify a floating point number between 0 and 1 to signify 0 - 100% of width';
         } else {
@@ -4227,7 +4295,7 @@ function getAllStyles(htmlStyleElement) {
             if (i + 1 < tokens.length) {
                 if (startsWith(tokens[i + 1], '\n') === false) {
                     //invalid split occurred. Please weld!
-                    tokens[i-1] = tokens[i-1]+tokens[i]+tokens[i+1];
+                    tokens[i - 1] = tokens[i - 1] + tokens[i] + tokens[i + 1];
                     //console.log('WELD-POINT:',tokens[i-1]);
                     tokens.splice(i, 1);
                     tokens.splice(i, 1);
@@ -4275,7 +4343,7 @@ function getStyle(htmlStyleElement, selector) {
     for (let i = 0; i < tokens.length; i++) {
         if (tokens[i].trim() === selector) {
             if (i + 1 < tokens.length) {
-                let  j = i + 1;
+                let j = i + 1;
                 //check between selector and opening curly brace to be sure no strange non-whitespace token is there
                 while (tokens[j] !== '{' && j < tokens.length) {
                     if (tokens[j].trim() !== '') {
@@ -4658,7 +4726,7 @@ Style.prototype.addStyleElementCss = function (style, duplicateAllowed) {
                     this.styleElements.push(styleObj);
                 }
             } else {
-                throw new Error('Weird css line expression____!'+style);
+                throw new Error('Weird css line expression____!' + style);
             }
         } else {
             throw new Error('Invalid css line expression!...' + style);
@@ -4686,7 +4754,6 @@ Style.prototype.getValue = function (attr) {
     return null;
 
 };
-
 
 
 /**
@@ -5165,7 +5232,6 @@ function getUrls() {
     return ResizeSensor;
 
 }));
-
 
 
 ////////////////////// ULID/javascript
