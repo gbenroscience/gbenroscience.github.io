@@ -64,6 +64,7 @@
         }
 
         #top-bar-title {
+            font-size: x-large;
             font-weight: bold;
             color: white;
         }
@@ -109,6 +110,7 @@
             justify-content: center;
             font-weight: bold;
             font-size: xxx-large;
+            color: #2A685F;
         }
 
 
@@ -166,7 +168,7 @@
             }
         }
 
-        function processItem(index, contentZoneTitle) {
+        function processItem(menu, dropdown, index, contentZoneTitle, fromSideMenu) {
             let country = getCountryByIndex(index);
             contentZoneTitle.innerText = country.name;
             let span1 = document.getElementById('city-1');
@@ -185,15 +187,23 @@
             span6.textContent = country.cities[5];
             span7.textContent = country.cities[6];
             span8.textContent = country.cities[7];
+            if(fromSideMenu){
+                dropdown.selectedIndex = index;
+            }else{
+                let items = menu.getElementsByTagName('li');
+                let li = items[index];
+                li.focus();
+            }
         }
 
         function processSidebarItems() {
             let contentZoneTitle = document.getElementById('content-block-title');
             let menu = document.getElementById('side-menu');
+            let dropdown = document.getElementById('countries-select');
             let items = menu.getElementsByTagName('li');
             for (let i = 0; i < items.length; i++) {
                 items[i].onclick = function (e) {
-                    processItem(i, contentZoneTitle);
+                    processItem(menu, dropdown, i, contentZoneTitle, true);
                 }
             }
             items[0].click();
@@ -201,9 +211,10 @@
 
         function processDropdownItems() {
             let contentZoneTitle = document.getElementById('content-block-title');
+            let menu = document.getElementById('side-menu');
             let dropdown = document.getElementById('countries-select');
             dropdown.onchange = function (ev) {
-                processItem(ev.target.selectedIndex, contentZoneTitle);
+                processItem(menu, dropdown, ev.target.selectedIndex, contentZoneTitle, false);
             };
         }
 
