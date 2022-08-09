@@ -67,9 +67,11 @@
             font-weight: bold;
             color: white;
         }
-        select{
+
+        select {
             border-radius: 4px;
         }
+
         select, select > option {
             font-size: 16px;
             font-weight: bold;
@@ -90,37 +92,133 @@
             background-color: #2A805F;
             cursor: pointer;
         }
+
         #logout-btn:active {
             color: wheat;
             background-color: #2A685F;
             cursor: pointer;
         }
-        #content-block{
-            font-size: 4em;
+
+        #content-block-title {
+            font-size: 1.25em;
             font-weight: bold;
         }
+
+        span[id^='city-'] {
+            display: inline-flex;
+            justify-content: center;
+            font-weight: bold;
+            font-size: xxx-large;
+        }
+
 
     </style>
     <script type="text/javascript" src="layman.js"></script>
     <script>
+        function Country(name) {
+            this.name = name;
+            this.cities = [];
+        }
+
+        Country.prototype.addCity = function (city) {
+            this.cities.push(city);
+        };
+        Country.prototype.setCities = function (arr) {
+            this.cities.length = 0;
+            this.cities = arr;
+        };
+        let ng = new Country("Nigeria");
+        ng.setCities(["Lagos", "Port Harcourt", "Onitsha", "Akure", "Abuja", "Kano", "Jos", "Makurdi"]);
+        let us = new Country("United States");
+        us.setCities(["Houston", "San Diego", "New York City", "Los Angeles", "Minneapolis", "Memphis", "Chicago", "Austin"]);
+        let ch = new Country("China");
+        ch.setCities(["Shanghai", "Beijing", "Wuhan", "Canton", "Guangzhou", "Nanking", "Shenyang", "Shenzhen"]);
+        let uk = new Country("United Kingdom");
+        uk.setCities(["London", "Birmingham", "Northampton", "Southampton", "Nottingham", "Belfast", "Glasgow", "Edinburgh"]);
+        let ge = new Country("Germany");
+        ge.setCities(["Berlin", "Hamburg", "Wolfsburg", "Stuttgart", "Munich", "Cologne", "Frankfurt", "Bonn"]);
+        let ind = new Country("India");
+        ind.setCities(["Mumbai", "New Delhi", "Pune", "Kolkata", "Bengaluru", "Jaipur", "Ahmedabad", "Hyderabad"]);
+        let cn = new Country("Canada");
+        cn.setCities(["Ottawa", "Toronto", "Calgary", "Winnipeg", "Vancouver", "Edmonton", "Victoria", "Montreal"]);
+        let sk = new Country("South Korea");
+        sk.setCities(["Seoul", "Busan", "Daegu", "Ulsan", "Changwon", "Jeju-si", "Seongnam-si", "Suwon-si"]);
+
+        function getCountryByIndex(index) {
+            switch (index) {
+                case 0:
+                    return ng;
+                case 1:
+                    return us;
+                case 2:
+                    return ch;
+                case 3:
+                    return uk;
+                case 4:
+                    return ge;
+                case 5:
+                    return ind;
+                case 6:
+                    return cn;
+                case 7:
+                    return sk;
+
+            }
+        }
+
+        function processItem(index, contentZoneTitle) {
+            let country = getCountryByIndex(index);
+            contentZoneTitle.innerText = country.name;
+            let span1 = document.getElementById('city-1');
+            let span2 = document.getElementById('city-2');
+            let span3 = document.getElementById('city-3');
+            let span4 = document.getElementById('city-4');
+            let span5 = document.getElementById('city-5');
+            let span6 = document.getElementById('city-6');
+            let span7 = document.getElementById('city-7');
+            let span8 = document.getElementById('city-8');
+            span1.textContent = country.cities[0];
+            span2.textContent = country.cities[1];
+            span3.textContent = country.cities[2];
+            span4.textContent = country.cities[3];
+            span5.textContent = country.cities[4];
+            span6.textContent = country.cities[5];
+            span7.textContent = country.cities[6];
+            span8.textContent = country.cities[7];
+        }
+
+        function processSidebarItems() {
+            let contentZoneTitle = document.getElementById('content-block-title');
+            let menu = document.getElementById('side-menu');
+            let items = menu.getElementsByTagName('li');
+            for (let i = 0; i < items.length; i++) {
+                items[i].onclick = function (e) {
+                    processItem(i, contentZoneTitle);
+                }
+            }
+            items[0].click();
+        }
+
+        function processDropdownItems() {
+            let contentZoneTitle = document.getElementById('content-block-title');
+            let dropdown = document.getElementById('countries-select');
+            dropdown.onchange = function (ev) {
+                processItem(ev.target.selectedIndex, contentZoneTitle);
+            };
+        }
+
         onLayoutComplete = function () {
-           let menu = document.getElementById('side-menu');
-           let items = menu.getElementsByTagName('li');
-           let contentZone  = document.getElementById('content-block');
-           for(let i=0;i<items.length;i++){
-               items[i].onclick = function (e) {
-                   contentZone.innerText = e.target.textContent;
-               }
-           }
+            processSidebarItems();
+            processDropdownItems();
         }
     </script>
 </head>
-<body data-guide-color="red">
+<body data-guide-color="#2A805F">
 
 <div id="sidebar" data-const="w:15%,h:100%,ss:parent,tt:parent">
     <span id="app-title" data-const="w:match_parent,h:48, ss: parent, tt: parent">Web Constraints</span>
     <ul id="side-menu" data-const="w: parent,h:50%,ss:parent,tb: app-title, mt: 32">
-        <li tabindex="1">Nigeria </li>
+        <li tabindex="1">Nigeria</li>
         <li tabindex="2">United States</li>
         <li tabindex="3">China</li>
         <li tabindex="4">United Kingdom</li>
@@ -134,21 +232,50 @@
 </div>
 <div id="top-bar" data-const="w:0,h:48px,tt:parent,se:sidebar,ee:parent">
 <span id="top-bar-title" data-const="w:wrap_content, h:wrap_content, ss:parent, cy:parent, ms:12px">
- Application Description
+ Countries and Cities
 </span>
 </div>
 <div id="content-area" data-const="w:0,h:0,se:sidebar,ee:parent,tb:top-bar,bb:parent">
     <select id="countries-select" data-const="w: wrap_content, h: 42px, tt: parent, ee: parent, mt: 4, me: 4">
         <option>Nigeria</option>
-        <option>United States of America</option>
-        <option>Israel</option>
+        <option>United States</option>
+        <option>China</option>
         <option>United Kingdom</option>
-        <option>Norway</option>
-        <option>Australia</option>
+        <option>Germany</option>
+        <option>India</option>
+        <option>Canada</option>
+        <option>South Korea</option>
     </select>
-    <span id="content-block" data-const="w:wrap_content, h:wrap_content, cx: parent, cy: parent">
-        CONTENT
+    <span id="content-block-title" data-const="w:wrap_content, h:wrap_content, tt: parent, ss: parent, ms: 4, mt: 4">
+        CONTENT TITLE
     </span>
+    <div id="content-block" data-const="w: 0, h:0, tb: countries-select, ss: parent, ee: parent, bb:parent, me: 1">
+        <div id="guide-ver-1" data-guide="true" data-const="orient:vertical, guide-pct:25%"></div>
+        <div id="guide-ver-2" data-guide="true" data-const="orient:vertical, guide-pct:50%"></div>
+        <div id="guide-ver-3" data-guide="true" data-const="orient:vertical, guide-pct:75%"></div>
+        <div id="guide-hor" data-guide="true" data-const="orient:horizontal, guide-pct:50%"></div>
+
+
+        <span id="city-1"
+              data-const="w:wrap_content, h:wrap_content, ss: parent, es: guide-ver-1, tt: parent, bt: guide-hor">CITY-1</span>
+        <span id="city-2"
+              data-const="w:wrap_content, h:wrap_content, maxW: 60@1000, se: guide-ver-1, es: guide-ver-2, tt: parent, bt: guide-hor">CITY-2</span>
+        <span id="city-3"
+              data-const="w:wrap_content, h:wrap_content, maxW: 100, se: guide-ver-2, es: guide-ver-3, tt: parent, bt: guide-hor">CITY-3</span>
+        <span id="city-4"
+              data-const="w:wrap_content, h:wrap_content, se: guide-ver-3, ee:parent, tt: parent, bt: guide-hor">CITY-4</span>
+
+
+        <span id="city-5"
+              data-const="w:wrap_content, h:wrap_content, ss: parent, es: guide-ver-1, tb: guide-hor, bb: parent">CITY-5</span>
+        <span id="city-6"
+              data-const="w:wrap_content, h:wrap_content, se: guide-ver-1, es: guide-ver-2, tb: guide-hor, bb: parent">CITY-6</span>
+        <span id="city-7"
+              data-const="w:wrap_content, h:wrap_content, se: guide-ver-2, es: guide-ver-3, tb: guide-hor, bb: parent">CITY-7</span>
+        <span id="city-8"
+              data-const="w:wrap_content, h:wrap_content, se: guide-ver-3, ee: parent, tb: guide-hor, bb: parent">CITY-8</span>
+
+    </div>
 </div>
 
 </body>
