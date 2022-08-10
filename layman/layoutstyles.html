@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Layout Style Sheet</title>
+
+
+    <style>
+        #sidebar {
+            background-color: #2A765F;
+        }
+
+        #app-title {
+            display: inline-flex;
+            align-items: center;
+            padding-left: 24px;
+            color: white;
+            background-color: #2A6650;
+            font-size: 1.3em;
+            font-weight: bold;
+            font-family: "Segoe MDL2 Assets", serif;
+        }
+
+        #top-bar {
+            border-left: 1px solid #2A765F;
+            background-color: #2A6650;
+        }
+
+        #content-area {
+            background-color: #dddddd;
+        }
+
+        #side-menu {
+            list-style-type: none;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        #side-menu > li {
+            list-style-type: none;
+            padding: 12px 8px 12px 24px;
+            color: white;
+            font-size: 1.05em;
+            font-weight: normal;
+            /* border-bottom: 1px solid #2A6650;*/
+        }
+
+        #side-menu > li:focus {
+            background-color: #2A805F;
+            border-radius: 4px;
+            text-decoration: underline solid wheat 1px;
+        }
+
+        #side-menu > li:first-child {
+            /*border-top: 1px solid #2A6650;*/
+        }
+
+        #side-menu > li:hover {
+            cursor: pointer;
+            list-style-type: none;
+            background-color: #2A805F;
+            border-radius: 4px;
+            font-weight: bold;
+            color: wheat;
+        }
+
+        #top-bar-title {
+            font-size: x-large;
+            font-weight: bold;
+            color: white;
+        }
+
+        select {
+            border-radius: 4px;
+        }
+
+        select, select > option {
+            font-size: 16px;
+            font-weight: bold;
+            padding-top: 16px;
+            padding-bottom: 16px;
+        }
+
+        #logout-btn {
+            color: white;
+            background-color: #2A765F;
+            font-weight: bold;
+            font-size: 1.18em;
+            border: 1px solid #2A6650;
+        }
+
+        #logout-btn:hover {
+            color: wheat;
+            background-color: #2A805F;
+            cursor: pointer;
+        }
+
+        #logout-btn:active {
+            color: wheat;
+            background-color: #2A685F;
+            cursor: pointer;
+        }
+
+        #content-block-title {
+            font-size: 1.25em;
+            font-weight: bold;
+        }
+
+        span[id^='city-'] {
+            display: inline-flex;
+            justify-content: center;
+            font-weight: bold;
+            font-size: xxx-large;
+            color: #2A685F;
+        }
+
+
+    </style>
+    <script type="text/javascript" src="layman.js"></script>
+
+    <script>
+        layoutCode = function () {
+            return {
+                body: {
+                    'data-guide-color': "#2A805F",
+                },
+                elements: {
+                    "sidebar": {
+                        w: "15%", h: "100%", ss: "parent", tt: "parent"
+                    },
+                    "app-title": {
+                        w: "match_parent", h: "48px", ss: "parent", tt: "parent"
+                    },
+                    "side-menu": {
+                        w: "parent", h: "50%", ss: "parent", tb: "app-title", mt: 32
+                    },
+                    "logout-btn": {
+                        w: "parent", h: "42px", ss: "parent", bb: "parent"
+                    },
+                    "top-bar": {
+                        w: 0, h: "48px", tt: "parent", se: "sidebar", ee: "parent"
+                    },
+                    "top-bar-title": {
+                        w: "wrap_content", h: "wrap_content", ss: "parent", cy: "parent", ms: "12px"
+                    },
+                    "content-area": {
+                        w: 0, h: 0, se: "sidebar", ee: "parent", tb: "top-bar", bb: "parent"
+                    },
+                    "countries-select": {
+                        w: "wrap_content", h: "42px", tt: "parent", ee: "parent", mt: "4", me: "4"
+                    },
+                    "content-block-title": {
+                        w: "wrap_content", h: "wrap_content", tt: "parent", ss: "parent", ms: "4", mt: "4"
+                    },
+                    "content-block": {
+                        w: "0", h: "0", tb: "countries-select", ss: "parent", ee: "parent", bb: "parent", me: "1px"
+                    },
+                    "guide-ver-1": {
+                        'data-guide': true, orient: "vertical", "guide-pct": "25%"
+                    },
+                    "guide-ver-2": {
+                        'data-guide': true, orient: "vertical", "guide-pct": "50%"
+                    },
+                    "guide-ver-3": {
+                        'data-guide': true, orient: "vertical", "guide-pct": "75%"
+                    },
+                    "guide-hor": {
+                        'data-guide': true, orient: "horizontal", "guide-pct": "50%"
+                    },
+                    "city-1": {
+                        w: "wrap_content", h: "wrap_content", ss: "parent", es: "guide-ver-1", tt: "parent", bt: "guide-hor"
+                    },
+                    "city-2": {
+                        w: "wrap_content", h: "wrap_content", maxW: "60@1000", se: "guide-ver-1", es: "guide-ver-2", tt: "parent", bt: "guide-hor"
+                    },
+                    "city-3": {
+                        w: "wrap_content", h: "wrap_content", maxW: "100", se: "guide-ver-2", es: "guide-ver-3", tt: "parent", bt: "guide-hor"
+                    },
+                    "city-4": {
+                        w: "wrap_content", h: "wrap_content", se: "guide-ver-3", ee: "parent", tt: "parent", bt: "guide-hor"
+                    },
+                    "city-5": {
+                        w: "wrap_content", h: "wrap_content", ss: "parent", es: "guide-ver-1", tb: "guide-hor", bb: "parent"
+                    },
+                    "city-6": {
+                        w: "wrap_content", h: "wrap_content", se: "guide-ver-1", es: "guide-ver-2", tb: "guide-hor", bb: "parent"
+                    },
+                    "city-7": {
+                        w: "wrap_content", h: "wrap_content", se: "guide-ver-2", es: "guide-ver-3", tb: "guide-hor", bb: "parent"
+                    },
+                    "city-8": {
+                        w: "wrap_content", h: "wrap_content", se: "guide-ver-3", ee: "parent", tb: "guide-hor", bb: "parent"
+                    }
+                }
+            }
+        };
+    </script>
+    <script>
+        function Country(name) {
+            this.name = name;
+            this.cities = [];
+        }
+
+        Country.prototype.addCity = function (city) {
+            this.cities.push(city);
+        };
+        Country.prototype.setCities = function (arr) {
+            this.cities.length = 0;
+            this.cities = arr;
+        };
+        let ng = new Country("Nigeria");
+        ng.setCities(["Lagos", "Port Harcourt", "Onitsha", "Akure", "Abuja", "Kano", "Jos", "Makurdi"]);
+        let us = new Country("United States");
+        us.setCities(["Houston", "San Diego", "New York City", "Los Angeles", "Minneapolis", "Memphis", "Chicago", "Austin"]);
+        let ch = new Country("China");
+        ch.setCities(["Shanghai", "Beijing", "Wuhan", "Canton", "Guangzhou", "Nanking", "Shenyang", "Shenzhen"]);
+        let uk = new Country("United Kingdom");
+        uk.setCities(["London", "Birmingham", "Northampton", "Southampton", "Nottingham", "Belfast", "Glasgow", "Edinburgh"]);
+        let ge = new Country("Germany");
+        ge.setCities(["Berlin", "Hamburg", "Wolfsburg", "Stuttgart", "Munich", "Cologne", "Frankfurt", "Bonn"]);
+        let ind = new Country("India");
+        ind.setCities(["Mumbai", "New Delhi", "Pune", "Kolkata", "Bengaluru", "Jaipur", "Ahmedabad", "Hyderabad"]);
+        let cn = new Country("Canada");
+        cn.setCities(["Ottawa", "Toronto", "Calgary", "Winnipeg", "Vancouver", "Edmonton", "Victoria", "Montreal"]);
+        let sk = new Country("South Korea");
+        sk.setCities(["Seoul", "Busan", "Daegu", "Ulsan", "Changwon", "Jeju-si", "Seongnam-si", "Suwon-si"]);
+
+        function getCountryByIndex(index) {
+            switch (index) {
+                case 0:
+                    return ng;
+                case 1:
+                    return us;
+                case 2:
+                    return ch;
+                case 3:
+                    return uk;
+                case 4:
+                    return ge;
+                case 5:
+                    return ind;
+                case 6:
+                    return cn;
+                case 7:
+                    return sk;
+
+            }
+        }
+
+        function processItem(menu, dropdown, index, contentZoneTitle, fromSideMenu) {
+            let country = getCountryByIndex(index);
+            contentZoneTitle.innerText = country.name;
+            let span1 = document.getElementById('city-1');
+            let span2 = document.getElementById('city-2');
+            let span3 = document.getElementById('city-3');
+            let span4 = document.getElementById('city-4');
+            let span5 = document.getElementById('city-5');
+            let span6 = document.getElementById('city-6');
+            let span7 = document.getElementById('city-7');
+            let span8 = document.getElementById('city-8');
+            span1.textContent = country.cities[0];
+            span2.textContent = country.cities[1];
+            span3.textContent = country.cities[2];
+            span4.textContent = country.cities[3];
+            span5.textContent = country.cities[4];
+            span6.textContent = country.cities[5];
+            span7.textContent = country.cities[6];
+            span8.textContent = country.cities[7];
+            if (fromSideMenu) {
+                dropdown.selectedIndex = index;
+            } else {
+                let items = menu.getElementsByTagName('li');
+                let li = items[index];
+                li.focus();
+            }
+        }
+
+        function processSidebarItems() {
+            let contentZoneTitle = document.getElementById('content-block-title');
+            let menu = document.getElementById('side-menu');
+            let dropdown = document.getElementById('countries-select');
+            let items = menu.getElementsByTagName('li');
+            for (let i = 0; i < items.length; i++) {
+                items[i].onclick = function (e) {
+                    processItem(menu, dropdown, i, contentZoneTitle, true);
+                }
+            }
+            items[0].click();
+        }
+
+        function processDropdownItems() {
+            let contentZoneTitle = document.getElementById('content-block-title');
+            let menu = document.getElementById('side-menu');
+            let dropdown = document.getElementById('countries-select');
+            dropdown.onchange = function (ev) {
+                processItem(menu, dropdown, ev.target.selectedIndex, contentZoneTitle, false);
+            };
+        }
+
+        onLayoutComplete = function () {
+            processSidebarItems();
+            processDropdownItems();
+        }
+    </script>
+</head>
+<body>
+<div id="sidebar">
+    <span id="app-title">Web Constraints</span>
+    <ul id="side-menu">
+        <li tabindex="1">Nigeria</li>
+        <li tabindex="2">United States</li>
+        <li tabindex="3">China</li>
+        <li tabindex="4">United Kingdom</li>
+        <li tabindex="5">Germany</li>
+        <li tabindex="6">India</li>
+        <li tabindex="7">Canada</li>
+        <li tabindex="8">South Korea</li>
+    </ul>
+    <input id="logout-btn" type="button" value="LOGOUT" title="Logout Button">
+</div>
+<div id="top-bar">
+<span id="top-bar-title">
+ Countries and Cities
+</span>
+</div>
+<div id="content-area">
+    <select id="countries-select">
+        <option>Nigeria</option>
+        <option>United States</option>
+        <option>China</option>
+        <option>United Kingdom</option>
+        <option>Germany</option>
+        <option>India</option>
+        <option>Canada</option>
+        <option>South Korea</option>
+    </select>
+    <span id="content-block-title">
+        CONTENT TITLE
+    </span>
+    <div id="content-block">
+        <div id="guide-ver-1"></div>
+        <div id="guide-ver-2"></div>
+        <div id="guide-ver-3"></div>
+        <div id="guide-hor"></div>
+
+        <span id="city-1">CITY-1</span>
+        <span id="city-2">CITY-2</span>
+        <span id="city-3">CITY-3</span>
+        <span id="city-4">CITY-4</span>
+
+        <span id="city-5">CITY-5</span>
+        <span id="city-6">CITY-6</span>
+        <span id="city-7">CITY-7</span>
+        <span id="city-8">CITY-8</span>
+    </div>
+</div>
+
+</body>
+</html>
