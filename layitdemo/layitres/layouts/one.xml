@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ConstraintLayout
+        width="match_parent"
+        height="match_parent"
+        backgroundColor="red"
+>
+
+    <imports
+            files="maincontroller.js;apputils.js;" controller="MainController"
+    />
+    <View
+            id="section_top_1"
+            width="match_parent"
+            height="33.333%"
+            cx_align="parent"
+            backgroundColor="midnightblue"
+            top_top='parent'
+            borderBottomLeftRadius="18px"
+            borderBottomRightRadius="18px"
+            margin="0"
+    />
+
+
+    <Label
+            id="title_1"
+            width="wrap_content"
+            height="wrap_content"
+            cy_align="section_top_1"
+            start_start="section_top_1"
+            marginStart="32"
+            textColor="white"
+            textSize="2.5em"
+            textStyle="bold"
+            fontStyle="normal"
+            text="Page 1"
+
+    />
+
+    <Button
+            id="nav_btn_1"
+            width="section_top_1*0.5"
+            height="48"
+            top_bottom="section_top_1"
+            bottom_bottom="parent"
+            cx_align="parent"
+            marginTop="16"
+            textColor="white"
+            textSize="1.7em"
+            textStyle="bold"
+            text="GOTO PAGE 2"
+            backgroundColor="#44C"
+            borderRadius="8px"
+    />
+
+</ConstraintLayout>
