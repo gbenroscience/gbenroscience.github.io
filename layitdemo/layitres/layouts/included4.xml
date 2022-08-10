@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<ConstraintLayout
+    width="90%"
+    height="match_parent"
+    cx_align="parent"
+>
+    
+    <Label
+        id="block_title_4"
+        width="wrap_content"
+        height="wrap_content"
+        cx_align='parent'
+        top_top="parent"
+        marginTop="16"
+        textColor="black"
+        value="Still more details"
+        textSize="1.2em"
+        textStyle="bold"
+        fontFamily="Arial"
+    />
+    
+        
+    
+    <TextField
+        id="phone_input_4"
+        width="150px"
+        height="32px"
+        start_start="parent"
+        end_end="parent"
+        top_bottom="block_title_4"
+        margin="8"
+        placeholder="Leisure Line"
+        background="white"
+        fontFamily="Arial"
+        padding="8px"
+        inputType="phone"
+        text=""
+        value=""
+        textColor="black"
+        textSize="1.2em"
+        textStyle="bold"
+        borderRadius="10px"
+    />
+
+        <include
+            layout="included7"
+            id="us_states_layout"
+            width="250"
+            height="120"
+            marginStart="0px"
+            cx_align="parent"
+            top_bottom="phone_input_4"
+            border="0px solid gray"
+            borderRadius="0em"
+    />
+    
+    
+</ConstraintLayout>
