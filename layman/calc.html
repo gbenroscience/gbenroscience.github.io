@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator UI</title>
+
+    <style>
+        div#frame {
+            border-radius: 8px;
+            background-color: black;
+        }
+
+        input#input {
+            background-color: transparent;
+            color: white;
+            border: 1px solid lightgray;
+            border-radius: 4px;
+            font-size: xx-large;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        input[id^='btn_'] {
+            border-radius: 50%;
+            font-size: 1.8em;
+        }
+
+        #btn_0 {
+            border-radius: 32px;
+            text-align: start;
+            padding-left: 20px;
+        }
+
+        .light_gray_btn {
+            background-color: #A7A7A7;
+            color: black;
+        }
+
+        .light_gray_btn:hover {
+            background-color: #C9C9C9;
+            cursor: pointer;
+        }
+
+        .orange_btn {
+            background-color: #FB9526;
+            color: white;
+        }
+
+        .orange_btn:hover {
+            background-color: #FDA338;
+            color: white;
+            cursor: pointer;
+        }
+
+        .dark_gray_btn {
+            background-color: #333333;
+            color: white;
+        }
+
+        .dark_gray_btn:hover {
+            background-color: #555555;
+            cursor: pointer;
+        }
+    </style>
+
+    <script src="layman.js"></script>
+    <script>
+        layoutCode = function () {
+            return {
+                body: {
+                    "data-guide-color": "transparent"
+                },
+                elements: {
+                    frame: {
+                        w: "300",
+                        h: "width*1.936567",
+                        cx: "parent",
+                        cy: "parent"
+                    },
+                    input: {
+                        w: "91.752%",
+                        h: "13.369%",
+                        cx: "parent",
+                        tt: "parent",
+                        mt: "28.866%",
+                    },
+                    btn_ac: {
+                        w: "height",
+                        h: "10.982659%",
+                        ss: "parent",
+                        tb: "input",
+                        mt: "18.391%",
+                        ms: "2.4%"
+                    },
+                    btn_plus_minus: {
+                        w: "btn_ac",
+                        h: "btn_ac",
+                        se: "btn_ac",
+                        cy: "btn_ac",
+                        ms: "2.4%"
+                    },
+                    btn_pct: {
+                        w: "btn_ac",
+                        h: "btn_ac",
+                        se: "btn_plus_minus",
+                        cy: "btn_ac",
+                        ms: "2.4%"
+                    },
+                    btn_divide: {
+                        w: "btn_ac",
+                        h: "btn_ac",
+                        se: "btn_pct",
+                        cy: "btn_ac",
+                        ms: "2.4%"
+                    },
+
+                    btn_7: {
+                        w: "btn_ac",
+                        h: "btn_ac",
+                        ss: "parent",
+                        tb: "btn_ac",
+                        mt: "1.83%",
+                        ms: "2.4%"
+                    },
+                    btn_8: {
+                        w: "btn_ac",
+                        h: "btn_ac",
+                        se: "btn_ac",
+                        cy: "btn_7",
+                        ms: "2.4%"
+                    },
+                    btn_9: {
+                        w: "btn_ac",
+                        h: "btn_ac",
+                        se: "btn_plus_minus",
+                        cy: "btn_7",
+                        ms: "2.4%"
+                    },
+                    btn_x: {
+                        w: "btn_ac",
+                        h: "btn_ac",
+                        se: "btn_pct",
+                        cy: "btn_7",
+                        ms: "2.4%"
+                    },
+
+                    btn_4: {
+                        w: "btn_ac",
+                        h: "btn_ac",
+                        ss: "parent",
+                        tb: "btn_7",
+                        mt: "1.83%",
+                        ms: "2.4%"
+                    },
+                    btn_5: {
+                        w: "btn_ac",
+                        h: "btn_ac",
+                        se: "btn_ac",
+                        cy: "btn_4",
+                        ms: "2.4%"
+                    },
+                    btn_6: {
+                        w: "btn_ac",
+                        h: "btn_ac",
+                        se: "btn_plus_minus",
+                        cy: "btn_4",
+                        ms: "2.4%"
+                    },
+                    btn_minus: {
+                        w: "btn_ac",
+                        h: "btn_ac",
+                        se: "btn_pct",
+                        cy: "btn_4",
+                        ms: "2.4%"
+                    },
+
+                    btn_1: {
+                        w: "btn_ac",
+                        h: "btn_ac",
+                        ss: "parent",
+                        tb: "btn_4",
+                        mt: "1.83%",
+                        ms: "2.4%"
+                    },
+                    btn_2: {
+                        w: "btn_ac",
+                        h: "btn_ac",
+                        se: "btn_ac",
+                        cy: "btn_1",
+                        ms: "2.4%"
+                    },
+                    btn_3: {
+                        w: "btn_ac",
+                        h: "btn_ac",
+                        se: "btn_plus_minus",
+                        cy: "btn_1",
+                        ms: "2.4%"
+                    },
+                    btn_plus: {
+                        w: "btn_ac",
+                        h: "btn_ac",
+                        se: "btn_pct",
+                        cy: "btn_1",
+                        ms: "2.4%"
+                    },
+                    btn_0: {
+                        w: "0",
+                        h: "btn_ac",
+                        ss: "btn_1",
+                        ee: "btn_2",
+                        tb: "btn_1",
+                        mt: "1.83%",
+                        ms: "0%"
+                    },
+                    btn_dot: {
+                        w: "btn_ac",
+                        h: "btn_ac",
+                        se: "btn_0",
+                        cy: "btn_0",
+                        ms: "2.4%"
+                    },
+                    btn_equals: {
+                        w: "btn_ac",
+                        h: "btn_ac",
+                        se: "btn_dot",
+                        cy: "btn_0",
+                        ms: "2.4%"
+                    },
+
+                }
+
+            };
+        };
+    </script>
+    <script>
+
+        let calc = new Calculator();
+        onLayoutComplete = function () {
+
+        };
+
+        function Calculator() {
+            this.operandLeft = "";
+            this.operandRight = "";
+            this.operator = null;
+            this.ans = 0;
+            this.resetInput = false;
+            this.justEvaluated = false;
+            this.acPressed = false;
+            let calc = this;
+            this.multiply = function () {
+                return calc.ans = parseFloat(calc.operandLeft) * parseFloat(calc.operandRight);
+            };
+            this.divide = function () {
+                return calc.ans = parseFloat(calc.operandLeft) / parseFloat(calc.operandRight);
+            };
+            this.add = function () {
+                return calc.ans = parseFloat(calc.operandLeft) + parseFloat(calc.operandRight);
+            };
+            this.subtract = function () {
+                return calc.ans = parseFloat(calc.operandLeft) - parseFloat(calc.operandRight);
+            };
+            this.remainder = function () {
+                return calc.ans = parseFloat(calc.operandLeft) % parseFloat(calc.operandRight);
+            };
+        }
+
+        Calculator.prototype.reset = function () {
+            this.operandLeft = "0";
+            this.operandRight = "";
+            this.operator = null;
+            this.ans = null;
+            this.resetInput = true;
+            this.justEvaluated = false;
+            this.acPressed = true;
+        }
+
+        Calculator.prototype.eval = function (inputField) {
+            let calc = this;
+            switch (calc.operator) {
+
+                case '×':
+                    calc.multiply();
+                    break;
+                case '+':
+                    calc.add();
+                    break;
+                case '-':
+                    calc.subtract();
+                    break;
+                case '%':
+                    calc.remainder();
+                    break;
+                case '÷':
+                    calc.divide();
+                    break;
+                default:
+                    break;
+            }
+
+            calc.resetInput = true;
+            calc.justEvaluated = true;
+            this.operator = null;
+            let ans = calc.ans + "";
+            if (ans.substring(0, 1) === '-') {
+                inputField.value = ans.substring(1) + '-';
+            } else {
+                inputField.value = ans;
+            }
+
+        };
+
+        function reverse(text) {
+            if (text && typeof text === 'string') {
+                let v = '';
+                for (let i = text.length; i >= 0; i--) {
+                    v += text.substring(i, i + 1);
+                }
+                return v;
+            }
+            return null;
+        }
+
+        function evts(numBtn, inputField) {
+            let ops = ['+', '-', '×', '÷', '%'];
+            let val = numBtn.value;
+            if (calc.acPressed) {
+                inputField.value = '';
+                calc.operandLeft = '';
+                calc.acPressed = false;
+            }
+            if (calc.resetInput) {
+                if (ops.indexOf(val) === -1) {//not operator
+                    inputField.value = '';
+                }
+                if (calc.justEvaluated) {
+                    calc.operandLeft = '';
+                    calc.operandRight = '';
+                    calc.operator = null;
+                    calc.justEvaluated = false;
+                }
+                calc.resetInput = false;
+            }
+
+            let currVal = inputField.value;
+
+            if (val === '±') {
+                if (calc.operator === null) {
+                    if (calc.operandLeft === '') {
+                        calc.operandLeft = '0';
+                    }
+                } else {
+                    if (calc.operandRight === '') {
+                        calc.operandRight = '0';
+                    }
+                }
+            }
+
+            if (isNumber(val) || val === '.') {
+                if (calc.operator === null) {
+                    if (val === ".") {
+                        if (calc.operandLeft.indexOf(".") === -1) {
+                            inputField.value = "." + currVal;
+                            calc.operandLeft += '.';
+                        }
+                    } else {
+                        calc.operandLeft += val;
+                        if (calc.operandLeft.indexOf(".") === -1 && calc.operandLeft.indexOf("-") === -1 && parseInt(calc.operandLeft) === 0) {
+                            calc.operandLeft = '0';
+                        }
+                        inputField.value = (calc.operandLeft.indexOf("-") !== -1) ? calc.operandLeft.substring(1) + "-" : calc.operandLeft;
+                    }
+                } else {
+                    if (val === ".") {
+                        if (calc.operandRight.indexOf(".") === -1) {
+                            inputField.value = "." + currVal;
+                            calc.operandRight += '.';
+                        }
+                    } else {
+                        calc.operandRight += val;
+                        if (calc.operandRight.indexOf(".") === -1 && calc.operandRight.indexOf("-") === -1 && parseInt(calc.operandRight) === 0) {
+                            calc.operandRight = '0';
+                        }
+                        inputField.value = (calc.operandRight.indexOf("-") !== -1) ? calc.operandRight.substring(1) + "-" : calc.operandRight;
+
+                    }
+                }
+            } else {
+                switch (val) {
+                    case 'AC':
+                        calc.reset();
+                        inputField.value = '0';
+                        break;
+                    case '×':
+                        calc.operator = '×';
+                        calc.resetInput = true;
+                        break;
+                    case '+':
+                        calc.operator = '+';
+                        calc.resetInput = true;
+                        break;
+                    case '-':
+                        calc.operator = '-';
+                        calc.resetInput = true;
+                        break;
+                    case '%':
+                        calc.operator = '%';
+                        calc.resetInput = true;
+                        break;
+                    case '±':
+                        if (currVal.indexOf("-") === -1) {
+                            inputField.value = currVal + "-";
+                            if(inputField.value === '-'){
+                                currVal = '-';
+                            }else{
+                                currVal = (currVal === '0') ? "-" + currVal : (-parseFloat(currVal));
+                            }
+                        } else {
+                            currVal = currVal.substring(0, currVal.length - 1);
+                            inputField.value = currVal;
+                        }
+                        if (calc.operator === null) {
+                            calc.operandLeft = currVal;
+                        } else {
+                            calc.operandRight = currVal;
+                        }
+                        break;
+                    case '÷':
+                        calc.operator = '÷';
+                        calc.resetInput = true;
+                        break;
+                    case '=':
+                        calc.eval(inputField);
+                        break;
+
+                }
+            }
+
+        }
+
+    </script>
+
+</head>
+<body>
+<div id="frame">
+    <input id="input" type="text" dir="rtl" disabled>
+
+    <input id="btn_ac" type="button" value="AC" class="light_gray_btn"
+           onclick="evts(this, document.getElementById('input'))">
+    <input id="btn_plus_minus" type="button" value="±" class="light_gray_btn"
+           onclick="evts(this, document.getElementById('input'))">
+    <input id="btn_pct" type="button" value="%" class="light_gray_btn"
+           onclick="evts(this, document.getElementById('input'))">
+    <input id="btn_divide" type="button" value="÷" class="orange_btn"
+           onclick="evts(this, document.getElementById('input'))">
+
+    <input id="btn_7" type="button" value="7" class="dark_gray_btn"
+           onclick="evts(this, document.getElementById('input'))">
+    <input id="btn_8" type="button" value="8" class="dark_gray_btn"
+           onclick="evts(this, document.getElementById('input'))">
+    <input id="btn_9" type="button" value="9" class="dark_gray_btn"
+           onclick="evts(this, document.getElementById('input'))">
+    <input id="btn_x" type="button" value="×" class="orange_btn" onclick="evts(this, document.getElementById('input'))">
+
+    <input id="btn_4" type="button" value="4" class="dark_gray_btn"
+           onclick="evts(this, document.getElementById('input'))">
+    <input id="btn_5" type="button" value="5" class="dark_gray_btn"
+           onclick="evts(this, document.getElementById('input'))">
+    <input id="btn_6" type="button" value="6" class="dark_gray_btn"
+           onclick="evts(this, document.getElementById('input'))">
+    <input id="btn_minus" type="button" value="-" class="orange_btn"
+           onclick="evts(this, document.getElementById('input'))">
+
+    <input id="btn_1" type="button" value="1" class="dark_gray_btn"
+           onclick="evts(this, document.getElementById('input'))">
+    <input id="btn_2" type="button" value="2" class="dark_gray_btn"
+           onclick="evts(this, document.getElementById('input'))">
+    <input id="btn_3" type="button" value="3" class="dark_gray_btn"
+           onclick="evts(this, document.getElementById('input'))">
+    <input id="btn_plus" type="button" value="+" class="orange_btn"
+           onclick="evts(this, document.getElementById('input'))">
+
+    <input id="btn_0" type="button" value="0" class="dark_gray_btn"
+           onclick="evts(this, document.getElementById('input'))">
+    <input id="btn_dot" type="button" value="." class="dark_gray_btn"
+           onclick="evts(this, document.getElementById('input'))">
+    <input id="btn_equals" type="button" value="=" class="orange_btn"
+           onclick="evts(this, document.getElementById('input'))">
+
+
+</div>
+
+</body>
+</html>
