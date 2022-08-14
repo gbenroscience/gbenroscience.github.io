@@ -12,12 +12,18 @@
 
         input#input {
             background-color: transparent;
-            color: white;
-            border: 1px solid lightgray;
+            color: wheat;
+            border: 1px solid #555;
             border-radius: 4px;
             font-size: xx-large;
             padding-left: 8px;
             padding-right: 8px;
+        }
+        /*"Lucida Calligraphy" "Vladimir Script"*/
+        span{
+            color: darkgray;
+            font-weight: bold;
+            font-family: "Viner Hand ITC",serif;
         }
 
         input[id^='btn_'] {
@@ -76,6 +82,13 @@
                         h: "width*1.936567",
                         cx: "parent",
                         cy: "parent"
+                    },
+                    label: {
+                        w: "wrap_content",
+                        h: "wrap_content",
+                        ss: "input",
+                        tt: "parent",
+                        mt: "8px"
                     },
                     input: {
                         w: "91.752%",
@@ -235,9 +248,6 @@
     <script>
 
         let calc = new Calculator();
-        onLayoutComplete = function () {
-
-        };
 
         function Calculator() {
             this.operandLeft = "";
@@ -248,20 +258,29 @@
             this.justEvaluated = false;
             this.acPressed = false;
             let calc = this;
+            function checkBounds(ans){
+                if(ans > 4E9){
+                    return calc.ans = "NaN";
+                }else if(ans < 5E-9){
+                    return calc.ans = "0";
+                }else{
+                    return ans;
+                }
+            }
             this.multiply = function () {
-                return calc.ans = parseFloat(calc.operandLeft) * parseFloat(calc.operandRight);
+                return calc.ans = checkBounds(parseFloat(calc.operandLeft) * parseFloat(calc.operandRight));
             };
             this.divide = function () {
-                return calc.ans = parseFloat(calc.operandLeft) / parseFloat(calc.operandRight);
+                return calc.ans = checkBounds(parseFloat(calc.operandLeft) / parseFloat(calc.operandRight));
             };
             this.add = function () {
-                return calc.ans = parseFloat(calc.operandLeft) + parseFloat(calc.operandRight);
+                return calc.ans = checkBounds(parseFloat(calc.operandLeft) + parseFloat(calc.operandRight));
             };
             this.subtract = function () {
-                return calc.ans = parseFloat(calc.operandLeft) - parseFloat(calc.operandRight);
+                return calc.ans = checkBounds(parseFloat(calc.operandLeft) - parseFloat(calc.operandRight));
             };
             this.remainder = function () {
-                return calc.ans = parseFloat(calc.operandLeft) % parseFloat(calc.operandRight);
+                return calc.ans = checkBounds(parseFloat(calc.operandLeft) % parseFloat(calc.operandRight));
             };
         }
 
@@ -273,7 +292,17 @@
             this.resetInput = true;
             this.justEvaluated = false;
             this.acPressed = true;
-        }
+        };
+
+        Calculator.prototype.runContinuousEvalCheck = function (inputField){
+            //user is doing stuff like 3*4-5+6...
+            if(this.operandLeft !== null && this.operandRight !== null && this.operator !== null){
+                    calc.eval(inputField);
+                    calc.justEvaluated = false;
+                    calc.operandLeft = calc.ans+"";
+                    calc.operandRight = '';
+            }
+        };
 
         Calculator.prototype.eval = function (inputField) {
             let calc = this;
@@ -392,19 +421,28 @@
                         inputField.value = '0';
                         break;
                     case '×':
+                        calc.runContinuousEvalCheck(inputField);
                         calc.operator = '×';
                         calc.resetInput = true;
                         break;
                     case '+':
+                        calc.runContinuousEvalCheck(inputField);
                         calc.operator = '+';
                         calc.resetInput = true;
                         break;
                     case '-':
+                        calc.runContinuousEvalCheck(inputField);
                         calc.operator = '-';
                         calc.resetInput = true;
                         break;
                     case '%':
+                        calc.runContinuousEvalCheck(inputField);
                         calc.operator = '%';
+                        calc.resetInput = true;
+                        break;
+                    case '÷':
+                        calc.runContinuousEvalCheck(inputField);
+                        calc.operator = '÷';
                         calc.resetInput = true;
                         break;
                     case '±':
@@ -425,17 +463,13 @@
                             calc.operandRight = currVal;
                         }
                         break;
-                    case '÷':
-                        calc.operator = '÷';
-                        calc.resetInput = true;
-                        break;
                     case '=':
                         calc.eval(inputField);
                         break;
 
                 }
             }
-
+console.log('calc:\n', calc);
         }
 
     </script>
@@ -443,6 +477,7 @@
 </head>
 <body>
 <div id="frame">
+    <span id="label">LaymanJS</span>
     <input id="input" type="text" dir="rtl" disabled>
 
     <input id="btn_ac" type="button" value="AC" class="light_gray_btn"
