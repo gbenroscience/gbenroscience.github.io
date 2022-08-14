@@ -258,29 +258,21 @@
             this.justEvaluated = false;
             this.acPressed = false;
             let calc = this;
-            function checkBounds(ans){
-                if(ans > 4E9){
-                    return calc.ans = "NaN";
-                }else if(ans < 5E-9){
-                    return calc.ans = "0";
-                }else{
-                    return ans;
-                }
-            }
+
             this.multiply = function () {
-                return calc.ans = checkBounds(parseFloat(calc.operandLeft) * parseFloat(calc.operandRight));
+                return calc.ans = checkAnsBounds(parseFloat(calc.operandLeft) * parseFloat(calc.operandRight));
             };
             this.divide = function () {
-                return calc.ans = checkBounds(parseFloat(calc.operandLeft) / parseFloat(calc.operandRight));
+                return calc.ans = checkAnsBounds(parseFloat(calc.operandLeft) / parseFloat(calc.operandRight));
             };
             this.add = function () {
-                return calc.ans = checkBounds(parseFloat(calc.operandLeft) + parseFloat(calc.operandRight));
+                return calc.ans = checkAnsBounds(parseFloat(calc.operandLeft) + parseFloat(calc.operandRight));
             };
             this.subtract = function () {
-                return calc.ans = checkBounds(parseFloat(calc.operandLeft) - parseFloat(calc.operandRight));
+                return calc.ans = checkAnsBounds(parseFloat(calc.operandLeft) - parseFloat(calc.operandRight));
             };
             this.remainder = function () {
-                return calc.ans = checkBounds(parseFloat(calc.operandLeft) % parseFloat(calc.operandRight));
+                return calc.ans = checkAnsBounds(parseFloat(calc.operandLeft) % parseFloat(calc.operandRight));
             };
         }
 
@@ -339,15 +331,61 @@
 
         };
 
-        function reverse(text) {
-            if (text && typeof text === 'string') {
-                let v = '';
-                for (let i = text.length; i >= 0; i--) {
-                    v += text.substring(i, i + 1);
+        function roundNumber(num, scale) {
+            if(!("" + num).includes("e")) {
+                return +(Math.round(num + "e+" + scale)  + "e-" + scale);
+            } else {
+                var arr = ("" + num).split("e");
+                var sig = ""
+                if(+arr[1] + scale > 0) {
+                    sig = "+";
                 }
-                return v;
+                return +(Math.round(+arr[0] + "e" + sig + (+arr[1] + scale)) + "e-" + scale);
             }
-            return null;
+        }
+        function checkAnsBounds(ans){
+            if(isNaN(parseFloat(ans))){
+                return ans;
+            }
+            if(parseFloat(ans) === 0){
+                return ans;
+            }
+
+            let abs = Math.abs(ans);
+
+            if(abs > 1E11){
+                return calc.ans = "NaN";
+            }else if(abs < 1E-11){
+                return calc.ans = "0";
+            }else{
+               return roundNumber(ans, 11);
+               // return ans;
+            }
+        }
+        function checkInputBounds(val, inputField){
+            if(isNaN(parseFloat(val))){
+                return val;
+            }
+            if(parseFloat(val) === 0){
+                return val;
+            }
+
+            let abs = Math.abs(val);
+            if(abs > 1E10){
+                inputField.value = 'Value too large!';
+                setTimeout(function () {
+                    calc.reset();
+                    inputField.value = '0';
+                }, 800);
+            }else if(abs < 1E-10){
+                inputField.value = 'Value too small!';
+                setTimeout(function () {
+                    calc.reset();
+                    inputField.value = '0';
+                },800);
+            }else{
+                return val;
+            }
         }
 
         function evts(numBtn, inputField) {
@@ -399,6 +437,7 @@
                         }
                         inputField.value = (calc.operandLeft.indexOf("-") !== -1) ? calc.operandLeft.substring(1) + "-" : calc.operandLeft;
                     }
+                    checkInputBounds(calc.operandLeft, inputField);
                 } else {
                     if (val === ".") {
                         if (calc.operandRight.indexOf(".") === -1) {
@@ -413,6 +452,7 @@
                         inputField.value = (calc.operandRight.indexOf("-") !== -1) ? calc.operandRight.substring(1) + "-" : calc.operandRight;
 
                     }
+                    checkInputBounds(calc.operandRight, inputField);
                 }
             } else {
                 switch (val) {
