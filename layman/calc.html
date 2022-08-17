@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"  content="width=device-width, initial-scale=1.0">
     <title>Calculator UI</title>
 
     <style>
@@ -332,7 +332,7 @@
         };
 
         function roundNumber(num, scale) {
-            if(!("" + num).includes("e")) {
+            if(("" + num).indexOf("e") === -1) {
                 return +(Math.round(num + "e+" + scale)  + "e-" + scale);
             } else {
                 var arr = ("" + num).split("e");
